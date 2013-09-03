@@ -6,6 +6,7 @@
 #include "array.h"
 #include "vector.h"
 #include "list.h"
+#include "set.h"
 
 int main()
 {
@@ -18,6 +19,7 @@ int main()
 	//test_vector();
 	// test_deque();
 	// test_list();
-	test_forward_list();
+	// test_forward_list();
+	test_set();	
 	return 0;
 }
