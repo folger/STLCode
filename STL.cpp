@@ -7,6 +7,7 @@
 #include "vector.h"
 #include "list.h"
 #include "set.h"
+#include "map.h"
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
 	// test_deque();
 	// test_list();
 	// test_forward_list();
-	test_set();	
+	// test_set();
+	test_map();
 	return 0;
 }
