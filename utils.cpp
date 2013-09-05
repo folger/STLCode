@@ -1,8 +1,7 @@
 #include <iostream>
-#include <string>
+#include <iomanip>
 
 void print_separator()
 {
-	std::string s(70, '-');
-	std::cout << s << std::endl;
+	std::cout << std::setfill('-') << std::setw(70) << "" << std::setfill(' ') << std::endl;
 }
