@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-void print_separator()
+void print_separator(const char* lpcszHint/* = ""*/)
 {
-	std::cout << std::setfill('-') << std::setw(70) << "" << std::setfill(' ') << std::endl;
+	std::cout << std::left << std::setfill('-') << std::setw(70) << lpcszHint << std::setfill(' ') << std::endl;
 }
