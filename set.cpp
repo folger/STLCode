@@ -6,11 +6,11 @@
 using namespace std;
 
 class RuntimeCmp {
-	public:
+public:
 	enum cmp_mode {normal, reverse};
-	private:
+private:
 	cmp_mode mode;
-	public:
+public:
 	// constructor for sorting criterion
 	// - default criterion uses value normal
 	RuntimeCmp (cmp_mode m=normal) : mode(m) {
@@ -19,14 +19,14 @@ class RuntimeCmp {
 	// - member function for any element type
 	template <typename T>
 	bool operator() (const T& t1, const T& t2) const {
-	return mode==normal ? t1<t2
-	: t2<t1;
+		return mode==normal ? t1<t2
+		: t2<t1;
 	}
 	// comparison of sorting criteria
 	bool operator== (const RuntimeCmp& rc) const {
-	return mode == rc.mode;
+		return mode == rc.mode;
 	}
-	};
+};
 
 static void test_set_runtime_sorting_criterion()
 {
@@ -51,12 +51,12 @@ static void test_set_runtime_sorting_criterion()
 	
 	// just to make sure...
 	if (coll1.value_comp() == coll2.value_comp()) {
-	cout << "coll1 and coll2 have the same sorting criterion"
-	<< endl;
+		cout << "coll1 and coll2 have the same sorting criterion"
+		<< endl;
 	}
 	else {
-	cout << "coll1 and coll2 have a different sorting criterion"
-	<< endl;
+		cout << "coll1 and coll2 have a different sorting criterion"
+		<< endl;
 	}
 	
 	PS;
@@ -76,7 +76,7 @@ void test_set()
 	coll1.insert(5);
 	// print all elements
 	for (int elem : coll1) {
-	cout << elem << ' ';
+		cout << elem << ' ';
 	}
 	cout << endl;
 	// insert 4 again and process return value

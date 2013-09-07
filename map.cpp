@@ -11,18 +11,18 @@ static void test_map_simple()
 	PS;
 	
 	map<string,double> coll { { "tim", 9.9 },
-	{ "struppi", 11.77 }
+		{ "struppi", 11.77 }
 	} ;
 	// square the value of each element:
 	for_each (coll.begin(), coll.end(),
 	[] (pair<const string,double>& elem) {
-	elem.second *= elem.second;
+		elem.second *= elem.second;
 	});
 	
 	// print each element:
 	for_each (coll.begin(), coll.end(),
 	[] (const map<string,double>::value_type& elem) {
-	cout << elem.first << ": " << elem.second << endl;
+		cout << elem.first << ": " << elem.second << endl;
 	});
 	
 	PS;
@@ -48,18 +48,18 @@ static void test_map_as_associative_array()
 	StringFloatMap::iterator pos;
 	cout << left; // left-adjust values
 	for (pos = stocks.begin(); pos != stocks.end(); ++pos) {
-	cout << "stock: " << setw(12) << pos->first
-	<< "price: " << pos->second << endl;
+		cout << "stock: " << setw(12) << pos->first
+		<< "price: " << pos->second << endl;
 	}
 	cout << endl;
 	// boom (all prices doubled)
 	for (pos = stocks.begin(); pos != stocks.end(); ++pos) {
-	pos->second *= 2;
+		pos->second *= 2;
 	}
 	// print all elements
 	for (pos = stocks.begin(); pos != stocks.end(); ++pos) {
-	cout << "stock: " << setw(12) << pos->first
-	<< "price: " << pos->second << endl;
+		cout << "stock: " << setw(12) << pos->first
+		<< "price: " << pos->second << endl;
 	}
 	cout << endl;
 	// rename key from "VW" to "Volkswagen"
@@ -68,9 +68,9 @@ static void test_map_as_associative_array()
 	stocks.erase("VW");
 	// print all elements
 	for (pos = stocks.begin(); pos != stocks.end(); ++pos) {
-	cout << "stock: " << setw(12) << pos->first
-	<< "price: " << pos->second << endl;
-}
+		cout << "stock: " << setw(12) << pos->first
+		<< "price: " << pos->second << endl;
+	}
 	
 	PS;
 }
@@ -83,10 +83,10 @@ static void test_map_as_associative_dictionary()
 	multimap<string,string> dict;
 	// insert some elements in random order
 	dict.insert ( { {"day","Tag"}, {"strange","fremd"},
-	{"car","Auto"}, {"smart","elegant"},
-	{"trait","Merkmal"}, {"strange","seltsam"},
-	{"smart","raffiniert"}, {"smart","klug"},
-	{"clever","raffiniert"} } );
+		{"car","Auto"}, {"smart","elegant"},
+		{"trait","Merkmal"}, {"strange","seltsam"},
+		{"smart","raffiniert"}, {"smart","klug"},
+		{"clever","raffiniert"} } );
 	// print all elements
 	cout.setf (ios::left, ios::adjustfield);
 	cout << ' ' << setw(10) << "english "
@@ -94,8 +94,8 @@ static void test_map_as_associative_dictionary()
 	cout << setfill('-') << setw(20) << ""
 	<< setfill(' ') << endl;
 	for ( const auto& elem : dict ) {
-	cout << ' ' << setw(10) << elem.first
-	<< elem.second << endl;
+		cout << ' ' << setw(10) << elem.first
+		<< elem.second << endl;
 	}
 	cout << endl;
 	
@@ -105,15 +105,15 @@ static void test_map_as_associative_dictionary()
 	for (auto pos = dict.lower_bound(word);
 	pos != dict.upper_bound(word);
 	++pos) {
-	cout << " " << pos->second << endl;
+		cout << " " << pos->second << endl;
 	}
 	// print all keys for value "raffiniert"
 	word = ("raffiniert");
 	cout << word << ": " << endl;
 	for (const auto& elem : dict) {
-	if (elem.second == word) {
-	cout << " " << elem.first << endl;
-	}
+		if (elem.second == word) {
+			cout << " " << elem.first << endl;
+		}
 	}
 	
 	PS;

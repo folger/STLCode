@@ -29,21 +29,43 @@ inline void hash_val (size_t& seed, const T& val, const Types&... types)
 	hash_val(seed, types...);
 }
 
-struct Customer
+class Customer
 {
+private:
 	string fname;
 	string lname;
 	long no;
+
+public:
+	Customer(const string& fn, const string& ln, long n) : fname(fn), lname(ln), no(n)
+	{
+	}
+
+	friend ostream& operator << (ostream& strm, const Customer& c)
+	{
+		return strm << "[" << c.fname << "," << c.lname << "," << c.no << "]";
+	}
+
+	friend class CustomerHash;
+	friend class CustomerEqual;
 };
 
 class CustomerHash
 {
 public:
-	size_t operator()(const Customer& customer)
+	size_t operator()(const Customer& customer) const
 	{
 		size_t seed = 0;
 		hash_val(seed, customer.fname, customer.lname, customer.no);
 		return seed;
+	}
+};
+
+class CustomerEqual
+{
+public:
+	bool operator() (const Customer& c1, const Customer& c2) const {
+		return c1.no == c2.no;
 	}
 };
 
@@ -60,7 +82,7 @@ static void test_unorder_container_multi()
 	// remove one of the elements with specific value
 	auto pos = coll.find(13);
 	if (pos != coll.end()) {
-	coll.erase(pos);
+		coll.erase(pos);
 	}
 	PRINT_ELEMENTS(coll);
 	
@@ -88,24 +110,35 @@ static void test_unorder_container_simple()
 	PRINT_ELEMENTS(coll);
 	// check if value 19 is in the set
 	if (coll.find(19) != coll.end()) {
-	cout << "19 is available" << endl;
+		cout << "19 is available" << endl;
 	}
 	// remove all negative values
 	unordered_set<int>::iterator pos;
 	for (pos=coll.begin(); pos!= coll.end(); ) {
-	if (*pos < 0) {
-	pos = coll.erase(pos);
-	}
-	else {
-	++pos;
-	}
+		if (*pos < 0) {
+			pos = coll.erase(pos);
+		}
+		else {
+			++pos;
+		}
 	}
 	PRINT_ELEMENTS(coll);
 	PS;
+}
+
+static void test_unorder_container_own_hash_function()
+{
+	// unordered set with own hash function and equivalence criterion
+	unordered_set<Customer,CustomerHash,CustomerEqual> custset;
+	custset.insert(Customer("nico","josuttis",42));
+	PRINT_ELEMENTS(custset);
 }
 
 void test_unorder_container()
 {
 	test_unorder_container_simple();
 	test_unorder_container_multi();
+	test_unorder_container_own_hash_function();
 }
+
+
