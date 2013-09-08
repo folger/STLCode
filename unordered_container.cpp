@@ -40,6 +40,10 @@ public:
 	Customer(const string& fn, const string& ln, long n) : fname(fn), lname(ln), no(n)
 	{
 	}
+	
+	const string& firstname() const { return fname; }
+	const string& lastname() const { return lname; }
+	long number() const { return no; }
 
 	friend ostream& operator << (ostream& strm, const Customer& c)
 	{
@@ -128,10 +132,32 @@ static void test_unorder_container_simple()
 
 static void test_unorder_container_own_hash_function()
 {
+	PSH("test_unorder_container_own_hash_function");
 	// unordered set with own hash function and equivalence criterion
 	unordered_set<Customer,CustomerHash,CustomerEqual> custset;
 	custset.insert(Customer("nico","josuttis",42));
 	PRINT_ELEMENTS(custset);
+	PS;
+}
+
+static void test_unorder_container_using_labmda_as_hash_function()
+{
+	PSH("test_unorder_container_using_labmda_as_hash_function");
+	// lambda for user-defined hash function
+	auto hash = [] (const Customer& c) {
+		size_t seed = 0;
+		hash_val(seed, c.firstname(),c.lastname(),c.number());
+		return seed;
+	};
+	// lambda for user-defined equality criterion
+	auto eq = [] (const Customer& c1, Customer& c2) {
+		return c1.number() == c2.number();
+	};
+	// unordered set with own hash function and equivalence criterion
+	unordered_set<Customer,decltype(hash), decltype(eq)> custset(10, hash, eq);
+	custset.insert(Customer("nico","josuttis",42));
+	PRINT_ELEMENTS(custset);
+	PS;
 }
 
 void test_unorder_container()
@@ -139,6 +165,7 @@ void test_unorder_container()
 	test_unorder_container_simple();
 	test_unorder_container_multi();
 	test_unorder_container_own_hash_function();
+	test_unorder_container_using_labmda_as_hash_function();
 }
 
 

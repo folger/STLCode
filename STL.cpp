@@ -9,6 +9,7 @@
 #include "set.h"
 #include "map.h"
 #include "unordered_container.h"
+#include "functor.h"
 
 int main()
 {
@@ -23,6 +24,7 @@ int main()
 	// test_list();
 	// test_forward_list();
 	// test_set();
-	test_unorder_container();
+	// test_unorder_container();
+	test_functor();
 	return 0;
 }
