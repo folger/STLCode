@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include "utils.h"
-#include "shared_ptr.h"
+#include "STL_test.h"
 
 void test_shared_ptr()
 {

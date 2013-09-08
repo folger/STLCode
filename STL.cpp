@@ -1,15 +1,4 @@
-#include "Pairs.h"
-#include "Tuples.h"
-#include "shared_ptr.h"
-#include "algorithms.h"
-#include "iterators.h"
-#include "array.h"
-#include "vector.h"
-#include "list.h"
-#include "set.h"
-#include "map.h"
-#include "unordered_container.h"
-#include "functor.h"
+#include "STL_test.h"
 
 int main()
 {

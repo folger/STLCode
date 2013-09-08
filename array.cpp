@@ -1,7 +1,7 @@
 #include <array>
 #include <algorithm>
 #include "utils.h"
-#include "array.h"
+#include "STL_test.h"
 
 void test_array()
 {

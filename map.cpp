@@ -3,7 +3,7 @@
 #include <iterator>
 #include <iomanip>
 #include "utils.h"
-#include "map.h"
+#include "STL_test.h"
 using namespace std;
 
 static void test_map_simple()

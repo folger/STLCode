@@ -4,7 +4,7 @@
 using namespace std;
 using namespace std::placeholders;
 #include "utils.h"
-#include "functor.h"
+#include "STL_test.h"
 
 static void test_binder()
 {

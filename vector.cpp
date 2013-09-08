@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include "utils.h"
-#include "vector.h"
+#include "STL_test.h"
 using namespace std;
 
 void test_vector()
