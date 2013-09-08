@@ -2,7 +2,10 @@
 cc = c++
 copt = -c -std=c++0x -Wall -Werror -g
 
-objects = utils.o STL.o Pairs.o Tuples.o shared_ptr.o algorithms.o iterators.o array.o vector.o list.o set.o map.o unordered_container.o functor.o
+objects = utils.o STL.o Pairs.o Tuples.o shared_ptr.o \
+		algorithms.o iterators.o array.o vector.o \
+		list.o set.o map.o unordered_container.o \
+		functor.o lambda.o
 
 STL:$(objects)
 		$(cc) -o STL $(objects)
@@ -21,6 +24,7 @@ set.o : STL_test.h utils.h
 map.o : STL_test.h utils.h
 unordered_container.o : STL_test.h utils.h
 functor.o : STL_test.h utils.h
+lambda.o : STL_test.h utils.h
 
 %.o : %.cpp
 		$(cc) $(copt) $< -o $@

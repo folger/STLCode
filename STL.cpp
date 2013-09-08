@@ -14,6 +14,7 @@ int main()
 	// test_forward_list();
 	// test_set();
 	// test_unorder_container();
-	test_functor();
+	// test_functor();
+	test_lambda();
 	return 0;
 }
