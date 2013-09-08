@@ -16,3 +16,4 @@ void PRINT_ELEMENTS(const T& coll, const char* optstr = "", const char* sepstr =
 	}
 	std::cout << std::endl;
 }
+
