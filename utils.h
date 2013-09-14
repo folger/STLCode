@@ -7,7 +7,7 @@
 void print_separator(const char* lpcszHint = "");
 
 template <typename T>
-void PRINT_ELEMENTS(const T& coll, const char* optstr = "", const char* sepstr = " ")
+inline void PRINT_ELEMENTS(const T& coll, const char* optstr = "", const char* sepstr = " ")
 {
 	std::cout << optstr;
 	for ( const auto& elem : coll )
@@ -15,5 +15,13 @@ void PRINT_ELEMENTS(const T& coll, const char* optstr = "", const char* sepstr =
 		std::cout << elem << sepstr;
 	}
 	std::cout << std::endl;
+}
+
+template <typename T>
+inline void INSERT_ELEMENTS (T& coll, int first, int last)
+{
+	for (int i=first; i<=last; ++i) {
+		coll.insert(coll.end(),i);
+	}
 }
 

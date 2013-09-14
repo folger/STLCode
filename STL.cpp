@@ -1,11 +1,13 @@
 #include "STL_test.h"
+#include <iostream>
+#include <string>
 
 int main()
 {
 	//test_pair();
 	//test_tuple();
 	//test_shared_ptr();
-	// test_algorithm();
+	test_algorithm();
 	// test_iterator();
 	// test_array();
 	//test_vector();
@@ -15,6 +17,7 @@ int main()
 	// test_set();
 	// test_unorder_container();
 	// test_functor();
-	test_lambda();
+	// test_lambda();
+	
 	return 0;
 }
