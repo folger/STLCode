@@ -107,6 +107,91 @@ static void test_find()
 	PS;
 }
 
+static void test_search_n()
+{
+	PSH("test_search_n");
+	
+	deque<int> coll;
+	coll = { 1, 2, 7, 7, 6, 3, 9, 5, 7, 7, 7, 3, 6 };
+	PRINT_ELEMENTS(coll);
+	// find three consecutive elements with value 7
+	deque<int>::iterator pos;
+	pos = search_n (coll.begin(), coll.end(), // range
+	3, // count
+	7); // value
+
+	// print result
+	if (pos != coll.end()) {
+		cout << "three consecutive elements with value 7 "
+		<< "start with " << distance(coll.begin(),pos) +1
+		<< ". element" << endl;
+	}
+	else {
+		cout << "no four consecutive elements with value 7 found"
+		<< endl;
+	}
+	// find four consecutive odd elements
+	pos = search_n (coll.begin(), coll.end(), // range
+	4, // count
+	0, // value
+	[](int elem, int value){ // criterion
+		return elem%2==1;
+	});
+	// print result
+	if (pos != coll.end()) {
+		cout << "first four consecutive odd elements are: ";
+		for (int i=0; i<4; ++i, ++pos) {
+			cout << *pos << ' ';
+		}
+	}
+	else {
+		cout << "no four consecutive elements with value > 3 found";
+	}
+	cout << endl;
+	
+	PS;
+}
+
+static bool checkEven (int elem, bool even)
+{
+	if (even) {
+		return elem % 2 == 0;
+	}
+	else {
+		return elem % 2 == 1;
+	}
+}
+
+static void test_search()
+{
+	PSH("test_search");
+
+	vector<int> coll;
+	INSERT_ELEMENTS(coll,1,9);
+	PRINT_ELEMENTS(coll,"coll: ");
+	// arguments for checkEven()
+	// - check for: ‘‘even odd even’’
+	bool checkEvenArgs[3] = { true, false, true };
+	// search first subrange in coll
+	vector<int>::iterator pos;
+	pos = search (coll.begin(), coll.end(), // range
+	checkEvenArgs, checkEvenArgs+3, // subrange values
+	checkEven); // subrange criterion
+	// loop while subrange found
+	while (pos != coll.end()) {
+		// print position of first element
+		cout << "subrange found starting with element "
+		<< distance(coll.begin(),pos) + 1
+		<< endl;
+		// search next subrange in coll
+		pos = search (++pos, coll.end(), // range
+		checkEvenArgs, checkEvenArgs+3, // subr. values
+		checkEven); // subr. criterion
+	}
+	
+	PS;
+}
+
 void test_algorithm()
 {
 	PSH("test_algorithm");
@@ -139,4 +224,6 @@ void test_algorithm()
 	test_count();
 	test_min_max();
 	test_find();
+	test_search_n();
+	test_search();
 }
