@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <list>
 #include <algorithm>
 #include "utils.h"
 #include "STL_test.h"
@@ -192,6 +193,143 @@ static void test_search()
 	PS;
 }
 
+static void test_find_end()
+{
+	PSH("test_find_end");
+	
+	deque<int> coll;
+	list<int> subcoll;
+	INSERT_ELEMENTS(coll,1,7);
+	INSERT_ELEMENTS(coll,1,7);
+	INSERT_ELEMENTS(subcoll,3,6);
+	PRINT_ELEMENTS(coll, "coll: ");
+	PRINT_ELEMENTS(subcoll,"subcoll: ");
+	//search last occurrence of subcoll in coll
+	deque<int>::iterator pos;
+	pos = find_end (coll.begin(), coll.end(), //range
+	subcoll.begin(), subcoll.end()); //subrange
+	// loopwhile subcoll found assubrange of coll
+	deque<int>::iterator end(coll.end());
+	while (pos != end) {
+		// print position of ﬁrst element
+		cout << "subcoll found starting with element "
+		<< distance(coll.begin(),pos) + 1
+		<< endl;
+		//search next occurrence of subcoll
+		end = pos;
+		pos = find_end (coll.begin(), end, //range
+		subcoll.begin(), subcoll.end()); //subrange
+	}
+	
+	PS;
+}
+
+static void test_find_first_of()
+{
+	PSH("find_first_of");
+	
+	vector<int> coll;
+	list<int> searchcoll;
+	INSERT_ELEMENTS(coll,1,11);
+	INSERT_ELEMENTS(searchcoll,3,5);
+	PRINT_ELEMENTS(coll, "coll: ");
+	PRINT_ELEMENTS(searchcoll,"searchcoll: ");
+	//search ﬁrst occurrence of an element of searchcoll in coll
+	vector<int>::iterator pos;
+	pos = find_first_of (coll.begin(), coll.end(), //range
+	searchcoll.begin(), // beginning ofsearch set
+	searchcoll.end()); // end ofsearch set
+
+	cout << "first element of searchcoll in coll is element "
+	<< distance(coll.begin(),pos) + 1
+	<< endl;
+	//search last occurrence of an element of searchcoll in coll
+	vector<int>::reverse_iterator rpos;
+	rpos = find_first_of (coll.rbegin(), coll.rend(), //range
+	searchcoll.begin(), // beginning ofsearch set
+	searchcoll.end()); // end ofsearch set
+	cout << "last element of searchcoll in coll is element "
+	<< distance(coll.begin(),rpos.base())
+	<< endl;
+	
+	PS;
+}
+
+static bool doubled (int elem1, int elem2)
+{
+	return elem1 * 2 == elem2;
+}
+
+static void test_adjacent_find()
+{
+	PSH("adjacent_find");
+	
+	vector<int> coll;
+	coll.push_back(1);
+	coll.push_back(3);
+	coll.push_back(2);
+	coll.push_back(4);
+	coll.push_back(5);
+	coll.push_back(5);
+	coll.push_back(0);
+	PRINT_ELEMENTS(coll,"coll: ");
+	//search ﬁrst two elementswith equal value
+	vector<int>::iterator pos;
+	pos = adjacent_find (coll.begin(), coll.end());
+	if (pos != coll.end()) {
+		cout << "first two elements with equal value have position "
+		<< distance(coll.begin(),pos) + 1
+		<< endl;
+	}
+	//search ﬁrst two elementsforwhich the second has double the value of the ﬁrst
+	pos = adjacent_find (coll.begin(), coll.end(), //range
+	doubled); // criterion
+	if (pos != coll.end()) {
+		cout << "first two elements with second value twice the "
+		<< "first have pos. "
+		<< distance(coll.begin(),pos) + 1
+		<< endl;
+	}
+	
+	PS;
+}
+
+static bool bothEvenOrOdd (int elem1, int elem2)
+{
+	return (elem1 & 1) == (elem2 & 1);
+}
+
+static void test_euqal()
+{
+	PSH("test_euqal");
+	
+	vector<int> coll1;
+	list<int> coll2;
+	INSERT_ELEMENTS(coll1,1,7);
+	INSERT_ELEMENTS(coll2,3,9);
+	PRINT_ELEMENTS(coll1,"coll1: ");
+	PRINT_ELEMENTS(coll2,"coll2: ");
+	// checkwhether both collections are equal
+	if (equal (coll1.begin(), coll1.end(), // ﬁrstrange
+				coll2.begin())) { //second range
+		cout << "coll1 == coll2" << endl;
+	}
+	else {
+		cout << "coll1 != coll2" << endl;
+	}
+	// check for corresponding even and odd elements
+	if (equal (coll1.begin(), coll1.end(), // ﬁrstrange
+				coll2.begin(), //second range
+				bothEvenOrOdd)) { // comparison criterion
+		cout << "even and odd elements correspond" << endl;
+	}
+	else {
+		cout << "even and odd elements do not correspond" << endl;
+	}
+	
+	PS;
+}
+
 void test_algorithm()
 {
 	PSH("test_algorithm");
@@ -226,4 +364,8 @@ void test_algorithm()
 	test_find();
 	test_search_n();
 	test_search();
+	test_find_end();
+	test_find_first_of();
+	test_adjacent_find();
+	test_euqal();
 }
